@@ -1,22 +1,111 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI Product Listing Optimizer · Elihome</title><link rel="stylesheet" href="style.css"></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Product Listing Optimizer · Elihome</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<header class="top"><div class="wrap"><p class="eyebrow">Elihome · AI tools</p><h1>AI Product Listing Optimizer</h1><p class="lead">Enter a few facts about a kitchen product. The AI writes a product title, five selling points, an SEO description and marketing copy in English.</p></div></header>
-<main class="wrap grid">
-<section class="card" aria-labelledby="form-title"><h2 id="form-title">Product details</h2><form id="product-form" novalidate>
-<label for="name">Product name <span class="req">*</span></label><input id="name" name="name" type="text" required placeholder="e.g. 24 cm non-stick frying pan">
-<label for="marketplace">Marketplace</label><select id="marketplace" name="marketplace"><option value="Amazon">Amazon</option><option value="Shopify">Shopify</option><option value="Wayfair">Wayfair</option></select>
-<label for="material">Material</label><input id="material" name="material" type="text" placeholder="e.g. Forged aluminium, ceramic coating, wooden handle">
-<label for="features">Key features</label><textarea id="features" name="features" rows="5" placeholder="One feature per line, e.g.&#10;Induction compatible&#10;Oven safe up to 180 °C&#10;Dishwasher safe"></textarea>
-<label for="customers">Target customers</label><input id="customers" name="customers" type="text" placeholder="e.g. Home cooks who want easy everyday cooking">
-<div class="actions"><button type="submit" id="generate" class="primary">Generate listing</button><button type="button" id="example" class="ghost">Fill example</button><button type="reset" class="ghost">Clear</button></div></form>
-<details class="settings" id="settings"><summary>API settings</summary><p class="hint">The app calls the Claude API directly from your browser. Paste your own Anthropic API key. It is kept only in this browser tab and is never saved in the code or on GitHub.</p><label for="apikey">Anthropic API key</label><input id="apikey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..."><label for="model">Model</label><select id="model"><option value="claude-haiku-5-5">Claude Haiku 5.5 (fast, low cost)</option><option value="claude-sonnet-5-5">Claude Sonnet 5.5 (higher quality)</option></select><label class="check"><input type="checkbox" id="remember"> Remember the key until I close this tab</label></details></section>
-<section class="card" aria-labelledby="out-title" aria-live="polite"><div class="out-head"><h2 id="out-title">Generated listing</h2><button type="button" id="copy-all" class="ghost small" disabled>Copy all</button></div><p id="status" class="status">Fill in the product details and press <strong>Generate listing</strong>.</p>
-<div id="results" hidden><p class="marketplace-result">Marketplace: <strong id="out-marketplace"></strong></p>
-<article class="block"><div class="block-head"><h3>Product title</h3><span id="title-count" class="count"></span><button type="button" class="copy ghost small" data-target="out-title-text">Copy</button></div><p id="out-title-text" class="title-text"></p></article>
-<article class="block"><div class="block-head"><h3>Five key selling points</h3><button type="button" class="copy ghost small" data-target="out-points">Copy</button></div><ol id="out-points"></ol></article>
-<article class="block"><div class="block-head"><h3>SEO description</h3><button type="button" class="copy ghost small" data-target="out-seo">Copy</button></div><p id="out-seo"></p><p class="keywords" id="out-keywords"></p></article>
-<article class="block"><div class="block-head"><h3>Marketing copy</h3><button type="button" class="copy ghost small" data-target="out-copy">Copy</button></div><p id="out-copy"></p></article>
-<p class="review">Check every claim before publishing. Safety and care claims (heat limits, "dishwasher safe", "food safe", induction) must match the approved product data.</p></div></section></main>
-<footer class="wrap foot">First version built with Claude · Elihome AI internship project</footer><script src="app.js"></script></body></html>
+  <header class="top">
+    <div class="wrap">
+      <p class="eyebrow">Elihome · AI tools</p>
+      <h1>AI Product Listing Optimizer</h1>
+      <p class="lead">Enter a few facts about a kitchen product. The AI writes a product title, five selling points, an SEO description and marketing copy in English.</p>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">Product details</h2>
+      <form id="product-form" novalidate>
+        <label for="name">Product name <span class="req">*</span></label>
+        <input id="name" name="name" type="text" required placeholder="e.g. 24 cm non-stick frying pan">
+
+        <label for="marketplace">Marketplace</label>
+        <select id="marketplace" name="marketplace">
+          <option value="Amazon">Amazon</option>
+          <option value="Shopify">Shopify</option>
+          <option value="Wayfair">Wayfair</option>
+        </select>
+
+        <label for="material">Material</label>
+        <input id="material" name="material" type="text" placeholder="e.g. Forged aluminium, ceramic coating, wooden handle">
+
+        <label for="features">Key features</label>
+        <textarea id="features" name="features" rows="5" placeholder="One feature per line, e.g.&#10;Induction compatible&#10;Oven safe up to 180 °C&#10;Dishwasher safe"></textarea>
+
+        <label for="customers">Target customers</label>
+        <input id="customers" name="customers" type="text" placeholder="e.g. Home cooks who want easy everyday cooking">
+
+        <div class="actions">
+          <button type="submit" id="generate" class="primary">Generate listing</button>
+          <button type="button" id="example" class="ghost">Fill example</button>
+          <button type="reset" class="ghost">Clear</button>
+        </div>
+      </form>
+
+      <details class="settings" id="settings">
+        <summary>API settings</summary>
+        <p class="hint">The app calls the AI directly from your browser with your own API key. The key is kept only in this browser tab and is never saved in the code or on GitHub.</p>
+
+        <label for="provider">AI provider</label>
+        <select id="provider">
+          <option value="gemini">Google Gemini (free tier available)</option>
+          <option value="anthropic">Anthropic Claude</option>
+        </select>
+
+        <label for="apikey" id="apikey-label">API key</label>
+        <input id="apikey" type="password" autocomplete="off" spellcheck="false">
+        <p class="hint" id="key-hint"></p>
+
+        <label for="model">Model</label>
+        <input id="model" type="text" list="model-list" autocomplete="off" spellcheck="false">
+        <datalist id="model-list"></datalist>
+
+        <label class="check"><input type="checkbox" id="remember"> Remember the key until I close this tab</label>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="out-title" aria-live="polite">
+      <div class="out-head">
+        <h2 id="out-title">Generated listing</h2>
+        <button type="button" id="copy-all" class="ghost small" disabled>Copy all</button>
+      </div>
+
+      <p id="status" class="status">Fill in the product details and press <strong>Generate listing</strong>.</p>
+
+      <div id="results" hidden>
+        <p class="marketplace-result">Marketplace: <strong id="out-marketplace"></strong></p>
+
+        <article class="block">
+          <div class="block-head"><h3>Product title</h3><span id="title-count" class="count"></span><button type="button" class="copy ghost small" data-target="out-title-text">Copy</button></div>
+          <p id="out-title-text" class="title-text"></p>
+        </article>
+
+        <article class="block">
+          <div class="block-head"><h3>Five key selling points</h3><button type="button" class="copy ghost small" data-target="out-points">Copy</button></div>
+          <ol id="out-points"></ol>
+        </article>
+
+        <article class="block">
+          <div class="block-head"><h3>SEO description</h3><button type="button" class="copy ghost small" data-target="out-seo">Copy</button></div>
+          <p id="out-seo"></p>
+          <p class="keywords" id="out-keywords"></p>
+        </article>
+
+        <article class="block">
+          <div class="block-head"><h3>Marketing copy</h3><button type="button" class="copy ghost small" data-target="out-copy">Copy</button></div>
+          <p id="out-copy"></p>
+        </article>
+
+        <p class="review">Check every claim before publishing. Safety and care claims (heat limits, "dishwasher safe", "food safe", induction) must match the approved product data.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">First version built with Claude, marketplace selector added with Codex · Elihome AI internship project</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
