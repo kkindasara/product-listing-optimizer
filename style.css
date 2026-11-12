@@ -80,3 +80,6 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .review { margin: 16px 0 0; padding: 10px 12px; background: var(--soft); border-radius: 8px; font-size: 14px; color: var(--accent-dark); }
 
 .foot { color: var(--muted); font-size: 13px; padding-bottom: 28px; }
+
+.marketplace-result { margin: 12px 0 0; color: var(--muted); }
+.marketplace-result strong { color: var(--ink); }

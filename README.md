@@ -7,13 +7,15 @@ A small web app for Elihome's kitchen products. Enter a product name, material, 
 - an SEO-friendly description (with keywords)
 - short marketing copy
 
-All text is in English. The app uses the Claude API.
+All text is in English. The listing can be tailored to Amazon, Shopify or Wayfair (marketplace selector added with Codex). The app works with Google Gemini (free tier available) or Anthropic Claude.
 
 ## How to use it
 
 1. Open the app (GitHub Pages link, or `index.html` in a browser).
-2. Open **API settings** and paste an Anthropic API key (created at console.anthropic.com).
-3. Fill in the product details (or press **Fill example**) and press **Generate listing**.
+2. Open **API settings**, choose the AI provider and paste your API key:
+   - Google Gemini: free key from aistudio.google.com (Get API key). On the free tier Google may use the text sent to improve its products, so use test data only.
+   - Anthropic Claude: key from console.anthropic.com (paid per request).
+3. Fill in the product details (or press **Fill example**), choose the marketplace and press **Generate listing**.
 4. Review the text, then copy each part or press **Copy all**.
 
 ## About the API key
@@ -32,13 +34,12 @@ The AI is told to use only the facts given and not to invent claims such as "dis
 |---|---|
 | `index.html` | Page layout: form and results |
 | `style.css` | Styles |
-| `app.js` | Prompt, API call and display of the results |
+| `app.js` | Prompt, marketplace guidance, API calls (Gemini or Claude) and display of the results |
 
 ## Possible next changes
 
-- Choose a marketplace (Amazon, Shopify, Wayfair) and adapt title length and style
 - Choose a tone (premium, friendly, technical)
 - Download the listing as a text or CSV file
 - Keep a history of generated listings
 
-First version built with Claude.
+First version built with Claude; marketplace selector added with Codex; Gemini support added with Claude.
