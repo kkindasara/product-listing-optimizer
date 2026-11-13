@@ -11,8 +11,8 @@ const PROVIDERS = {
     keyLabel: "Google Gemini API key",
     keyPlaceholder: "AIza...",
     keyHint: "Create a free key at aistudio.google.com (Get API key). On the free tier Google may use the text you send to improve its products, so use test data only.",
-    defaultModel: "gemini-flash-latest",
-    models: ["gemini-flash-latest", "gemini-flash-lite-latest"]
+    defaultModel: "gemini-flash-lite-latest",
+    models: ["gemini-flash-lite-latest", "gemini-flash-latest"]
   },
   anthropic: {
     keyLabel: "Anthropic API key",
@@ -177,7 +177,7 @@ async function friendlyError(response, provider) {
   if (s === 403) return "This API key is not allowed to use this model or service.";
   if (s === 404) return "Model not found. Choose another model in API settings" + (provider === "gemini" ? " (see the model list in Google AI Studio)." : ".");
   if (s === 429) return "Too many requests or no free quota/credit left. Wait a moment and try again.";
-  if (s >= 500) return "The AI service is busy or unavailable. Try again in a minute.";
+  if (s >= 500) return "The AI service is busy or unavailable (error " + s + (detail ? ": " + detail : "") + "). Try again in a minute.";
   return "Request failed (" + s + ")" + (detail ? ": " + detail : ".");
 }
 
